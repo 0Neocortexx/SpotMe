@@ -1,9 +1,11 @@
 package com.spotme.project_spotme.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spotme.project_spotme.model.entities.Usuario;
@@ -27,11 +29,11 @@ public class CadastroUserController {
 
     @PostMapping("/usuario")
     public String cadastraUsuario(@RequestBody Usuario data_user) {
-
+        
         Usuario value = findEmailService.buscarUsuarioPorEmail(data_user.getEmail());
 
         if (value != null) {
-            return "Usuário já existe!";
+            return "Email já cadastrado no sistema!";
         } else {
             usuarioRepository.save(data_user);
             return "OK!";
