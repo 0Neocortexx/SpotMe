@@ -1,27 +1,27 @@
 package com.spotme.project_spotme.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.spotme.project_spotme.model.entities.Usuario;
 import com.spotme.project_spotme.repository.UsuarioRepository;
 
+@RestController
 @RequestMapping("/users")
 public class GetUserController {
- 
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @GetMapping("/{id}")
-    public ResponseEntity getUser(@PathVariable Long id) {
-        Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        if (usuario != null) {
-            return ResponseEntity.ok(usuario);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping()
+    @ResponseBody
+    public List<Usuario> getUser() {
+        List<Usuario> users = usuarioRepository.findAll();
+        return users;
     }
 }
