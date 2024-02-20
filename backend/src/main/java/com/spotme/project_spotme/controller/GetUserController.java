@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.spotme.project_spotme.model.entities.Usuario;
 import com.spotme.project_spotme.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:8080")
 public class GetUserController {
 
     @Autowired

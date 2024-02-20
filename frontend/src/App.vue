@@ -9,7 +9,9 @@ export default {
         nome: '',
         email: '',
         senha: ''
-      }
+      },
+
+      usuarios: []
     }
   },
   methods: {
@@ -20,7 +22,7 @@ export default {
         }
       })
       .then(response => {
-        alert("Certo", response.data);
+        console.log("Situação: ", response.data)
 
         this.NovoUsuario = {
           nome : '',
@@ -31,9 +33,24 @@ export default {
       .catch(error => {
         console.error('Erro ao adicionar usuário:', error);
       });
+    },
+
+    mostraUsuarios() {
+      axios.get('http://localhost:8085/users') 
+      .then(response => {
+
+        this.usuarios = response.data
+
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
   }
 }
+
+
+
 </script>
 
 <template>
@@ -48,5 +65,36 @@ export default {
       <input type="password" id="senha" v-model="NovoUsuario.senha" required><br>
       <button type="submit">Adicionar Usuário</button>
     </form>
+  </div>
+
+  <div>
+    <button @click="mostraUsuarios">Usuarios</button>
+  </div>
+
+  <div id="dados">
+
+    <!-- Cria a tabela -->
+    <table style="border: 1px solid black;">
+      <!-- Cabeçalho da tabela -->
+        <thead>
+          <tr style="border: 1px solid black;">
+            <th>Nome</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+
+        <!-- Corpo da tabela -->
+        <tbody>
+
+          <!-- For que percorre a lista de usuarios criada na função  -->
+
+          <tr v-for="usuario in usuarios" :key="usuario.id">
+            <td style="border: 1px solid black; margin: 10px;">{{ usuario.nome }}</td>
+            <td style="border: 1px solid black; margin: 10px">{{ usuario.email }}</td>
+           
+
+          </tr>
+        </tbody>
+      </table>
   </div>
 </template>
