@@ -7,22 +7,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.spotme.project_spotme.model.entities.Usuario;
-import com.spotme.project_spotme.model.entities.Publicacao;
-import com.spotme.project_spotme.repository.PublicacaoRepository;
 import com.spotme.project_spotme.repository.UsuarioRepository;
 import com.spotme.project_spotme.services.FindEmailService;
 
 @RestController
 @RequestMapping(value = "/cadastro")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080/")
 public class CadastroUserController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private PublicacaoRepository publicacao;
 
     @Autowired
     private FindEmailService findEmailService;
@@ -38,10 +34,5 @@ public class CadastroUserController {
             usuarioRepository.save(data_user);
             return "OK!";
         }
-    }
-
-    @PostMapping("/publicacao")
-    public void cadastraPublicacao(@RequestBody Publicacao pub) {
-        publicacao.save(pub);
     }
 }

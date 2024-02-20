@@ -12,13 +12,13 @@ import com.spotme.project_spotme.model.entities.Publicacao;
 import com.spotme.project_spotme.repository.PublicacaoRepository;
 
 @RestController
-@RequestMapping(value = "/publicacao")
+@RequestMapping(value = "/publicar")
 public class InserirPublicacaoController {
     
     @Autowired
     private PublicacaoRepository publicacaoRepository;
 
-    @PostMapping("/publicar")
+    @PostMapping()
     public String inserirPublicacao(@RequestBody Publicacao publicacao) {
 
         LocalDateTime dataAtual = LocalDateTime.now();
