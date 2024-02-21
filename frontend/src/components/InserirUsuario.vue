@@ -19,11 +19,15 @@
 
 <script>
 
+// Importa a biblioteca Axios para Requisições 
 import axios from 'axios';
 
+// Exporta um objeto Vue que define um componente
 export default {
+  // Define os dados do componente
     data() {
         return {
+          // Cria o objeto NovoUsuario
             NovoUsuario: {
                 nome: '',
                 email: '',
@@ -32,22 +36,32 @@ export default {
     }
   },
   methods: {
+    // Define o método addUser para adicionar um usuario ao banco de dados da API
     addUser() {
-      axios.post('http://localhost:8085/cadastro/usuario', this.NovoUsuario, {
+      // Realiza uma requisição POST na rota fornecida
+      axios.post('http://localhost:8085/cadastro/usuario', this.NovoUsuario, { // Envia os dados presentes no objeto NovoUsuario
+        
+        // Tipo do arquivo enviado a API
         headers: {
           'Content-Type': 'application/json'
         }
       })
+      // Se a requisição for bem sucedida
       .then(response => {
+        
+        // Exibe a situação no console
         console.log("Situação: ", response.data)
 
+        // Limpa o objeto NovoUsuario para novas requisições
         this.NovoUsuario = {
           nome : '',
           email : '',
           senha : ''
         };
       })
+      // Se a requisição for mal sucedida
       .catch(error => {
+        // exibe o erro no console
         console.error('Erro ao adicionar usuário:', error);
       });
     }
